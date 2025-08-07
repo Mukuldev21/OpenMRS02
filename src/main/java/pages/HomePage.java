@@ -26,6 +26,9 @@ public class HomePage extends BasePage {
     @FindBy(css = "li.nav-item.logout")
     public WebElement logoutMenuItem;
 
+    @FindBy(xpath = "//a[contains(@href,'coreapps.findPatient')]")
+    public WebElement findPatientLink;
+
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -85,5 +88,9 @@ public class HomePage extends BasePage {
     public void waitTillPageIsLoaded() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.logo a")));
     }
+    public void clickFindPatientLink() {
+        findPatientLink.click();
+    }
+
 
 }

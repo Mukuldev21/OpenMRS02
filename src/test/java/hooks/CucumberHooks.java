@@ -21,6 +21,7 @@ package hooks;
       private static final ThreadLocal<Integer> stepCounter = ThreadLocal.withInitial(() -> 0);
       public static Properties config;
       public static JsonObject loginDetails;
+      public static JsonObject patientSearchDetails;
 
       private static final ExtentReports extent = ExtentReportManager.getInstance();
       private static final Map<String, ExtentTest> featureTestMap = new ConcurrentHashMap<>();
@@ -31,6 +32,8 @@ package hooks;
           try {
               config = ConfigReader.loadProperties("src/test/resources/config/config.properties");
               loginDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/loginDetails.json");
+              patientSearchDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/patientRecordForSearch.json");
+                // Initialize WebDriver based on the configuration
               driver.set(DriverManager.getDriver(config));
           } catch (Exception e) {
               throw new RuntimeException("Failed to initialize WebDriver or load config", e);
