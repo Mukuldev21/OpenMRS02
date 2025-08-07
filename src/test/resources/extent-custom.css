@@ -1,0 +1,26 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #181c24;
+}
+.card, .card-header, .card-footer {
+    border-radius: 10px !important;
+    box-shadow: 0 2px 8px #0002;
+}
+.badge.log.pass-bg {
+    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+    color: #222;
+    font-weight: bold;
+}
+.badge.log.fail-bg {
+    background: linear-gradient(90deg, #ff5858 0%, #f09819 100%);
+    color: #fff;
+    font-weight: bold;
+}
+span[style*="color:#4CAF50;"] {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+span[style*="color:#F44336;"] {
+    font-size: 1.1em;
+    font-weight: bold;
+}
