@@ -6,6 +6,11 @@ This project is an automated testing framework for the OpenMRS patient record sy
 
 ## Project Structure
 
+---
+
+## 📁 Project Structure — `OpenMRS02`
+
+```bash
 OpenMRS02/
 ├── pom.xml                          # Maven configuration file
 ├── src/
@@ -16,7 +21,7 @@ OpenMRS02/
 │   │       │   ├── HomePage.java
 │   │       │   ├── LoginPage.java
 │   │       │   └── PatientRecordPage.java
-│   │       └── utils/              # Utility classes
+│   │       └── utils/              # Utility classes for config, driver, reporting
 │   │           ├── ConfigReader.java
 │   │           ├── DriverManager.java
 │   │           ├── ExtentReportManager.java
@@ -27,27 +32,31 @@ OpenMRS02/
 │       │   ├── features/           # Cucumber feature files
 │       │   │   ├── FindPatientRecord.feature
 │       │   │   └── Login.feature
-│       │   ├── hooks/              # Cucumber hooks
+│       │   ├── hooks/              # Cucumber lifecycle hooks
 │       │   │   └── CucumberHooks.java
 │       │   ├── runner/             # Test runner class
 │       │   │   └── TestRunner.java
-│       │   ├── steps/              # Step definitions
+│       │   ├── steps/              # Step definitions for feature files
 │       │   │   ├── FindPatientRecordSteps.java
 │       │   │   └── LoginSteps.java
-│       │   └── tests/              # Base test class
+│       │   └── tests/              # Base test setup
 │       │       └── BaseTest.java
 │       └── resources/
-│           ├── spark-config.html   # Spark report configuration
+│           ├── spark-config.html   # Spark report theme and layout config
 │           ├── config/
-│           │   └── config.properties
-│           └── test_data/          # Test data files
+│           │   └── config.properties  # Environment and browser settings
+│           └── test_data/          # External test data files
 │               ├── loginDetails.json
 │               └── patientRecordForSearch.json
-├── target/                         # Build output directory
+├── target/                         # Maven build output directory
 │   └── (build output)
 └── test-output/
-└── ExtentReport/
-└── index.html              # Generated Spark HTML report
+    └── ExtentReport/
+        └── index.html              # Generated Spark HTML report
+```
+
+---
+
 
 
 ### Key Directories and Files
