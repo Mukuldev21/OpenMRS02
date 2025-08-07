@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f7f7f7; }
+        .header { background: #222; color: #fff; padding: 20px; text-align: center; font-weight: bold; font-size: 2em; }
+        .tabs { display: flex; background: #333; }
+        .tab {
+            flex: 1;
+            padding: 15px;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            border-bottom: 3px solid transparent;
+            transition: border 0.2s;
+        }
+        .tab.active { border-bottom: 3px solid #ff9800; background: #444; }
+        .tab-content { display: none; padding: 30px; background: #fff; }
+        .tab-content.active { display: block; }
+        .section-title { font-size: 1.5em; font-weight: bold; margin-bottom: 20px; }
+        .failed { color: #fff; background: #e53935; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
+        .scenario { color: #1976d2; font-weight: bold; }
+        .defect { background: #ffeb3b; color: #b71c1c; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
+        .step { margin-bottom: 10px; }
+    </style>
+    <script>
+        function showTab(tabIndex) {
+            var tabs = document.querySelectorAll('.tab');
+            var contents = document.querySelectorAll('.tab-content');
+            tabs.forEach((tab, i) => {
+                tab.classList.toggle('active', i === tabIndex);
+                contents[i].classList.toggle('active', i === tabIndex);
+            });
+        }
+        window.onload = function() { showTab(0); };
+    </script>
+</head>
+<body>
+    <div class="header">Test Report</div>
+    <div class="tabs">
+        <div class="tab active" onclick="showTab(0)">Tests</div>
+        <div class="tab" onclick="showTab(1)">Dashboard</div>
+        <div class="tab" onclick="showTab(2)">Bugs/Defects</div>
+    </div>
+    <div class="tab-content active">
+        <div class="section-title">Tests</div>
+        <div class="scenario">Login Scenario</div>
+        <div class="step">Step 1: Open Login Page <span class="failed">Failed</span></div>
+        <div class="step">Step 2: Enter Credentials</div>
+        <div class="step">Step 3: Click Login</div>
+    </div>
+    <div class="tab-content">
+        <div class="section-title">Dashboard</div>
+        <p>Summary of test execution, pass/fail rates, and trends.</p>
+    </div>
+    <div class="tab-content">
+        <div class="section-title">Bugs/Defects</div>
+        <div class="defect">BUG-101: Login button not responding</div>
+        <div class="defect">BUG-102: Error message not displayed for invalid credentials</div>
+    </div>
+</body>
+</html>
+
