@@ -5,9 +5,9 @@ Feature: Login Functionality
 
    @smoke
   Scenario: Successful login with valid credentials
-    When The User enters a valid username and password
-    And The User clicks the login button
-    Then The User should be redirected to the Homepage
+     When The User enters a valid username and password
+     And The User clicks the login button
+     Then The User should be redirected to the Homepage
 
   @smoke
   Scenario Outline: Unsuccessful login with invalid credentials

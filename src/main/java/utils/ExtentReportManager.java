@@ -4,6 +4,8 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
+import java.io.IOException;
+
 public class ExtentReportManager {
     private static ExtentReports extent;
 
@@ -11,9 +13,13 @@ public class ExtentReportManager {
         if (extent == null) {
             String reportPath = System.getProperty("user.dir") + "/test-output/ExtentReport/index.html";
             ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
-            spark.config().setTheme(Theme.DARK);
-            spark.config().setDocumentTitle("Test Automation Report");
-            spark.config().setReportName("OpenMRS02 Test Results");
+            // Load custom Spark config
+            String configPath = System.getProperty("user.dir") + "/src/test/resources/spark-config.html";
+            try {
+                spark.loadXMLConfig(configPath);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
             extent = new ExtentReports();
             extent.attachReporter(spark);
