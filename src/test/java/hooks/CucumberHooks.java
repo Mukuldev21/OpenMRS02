@@ -29,6 +29,8 @@ package hooks;
 
       @Before
       public void setUp(Scenario scenario) {
+
+          stepCounter.set(0);
           try {
               config = ConfigReader.loadProperties("src/test/resources/config/config.properties");
               loginDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/loginDetails.json");
@@ -40,15 +42,26 @@ package hooks;
           }
           getDriver().manage().window().maximize();
 
+          // Extract feature name from scenario
           String featureName = scenario.getUri().toString()
                   .substring(scenario.getUri().toString().lastIndexOf('/') + 1)
                   .replace(".feature", "");
 
-          stepCounter.set(0);
+
+
+          // Create or get the feature-level test (parent)
           ExtentTest featureTest = featureTestMap.computeIfAbsent(featureName, k -> extent.createTest(featureName));
+
+          // Create a scenario node (child) under the feature
           String highlightedName = "<span style='color:#fff; font-weight:bold;'>" + scenario.getName() + "</span>";
           ExtentTest scenarioNode = featureTest.createNode(highlightedName);
           scenarioTest.set(scenarioNode);
+
+          // Log scenario tags as badges
+          String tags = scenario.getSourceTagNames().stream()
+                  .map(tag -> "<span style='background-color:#E0E0E0; color:#000; padding:2px 5px; border-radius:3px; margin-right:5px;'>" + tag + "</span>")
+                  .reduce("", (a, b) -> a + b);
+          scenarioNode.info("<div>Tags: " + tags + "</div>");
       }
 
       @AfterStep

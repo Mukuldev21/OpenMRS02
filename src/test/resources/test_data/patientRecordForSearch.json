@@ -1,5 +1,11 @@
 {
-  "patient-id": "100J9R",
-  "patient-name": "Micheal Francis Scott"
+  "patient-id": "100HXG",
+  "patient-name": "Micheal Francis Scott",
+  "weight": "88",
+  "height": "178",
+  "temperature": "38",
+  "systolic-blood-pressure": "154",
+  "diastolic-blood-pressure" : "90",
+  "conditions": "Diabetes mellitus, type 2"
 
 }

@@ -7,12 +7,12 @@ Feature: Find Patient Record Functionality
     Then The User should be redirected to the Homepage
     And The User should click on "Find Patient Record option" in the menu
 
-  @smoke1
+  @smoke
   Scenario: Successfully find a patient record by ID
     When The User enters a valid patient ID from jsondata file
     Then The patient record for patient ID should be displayed
 
-  @smoke1
+  @smoke
   Scenario Outline: Unsuccessful search for a patient record with invalid ID
     When The User enters an invalid patient ID "<patientID>"
     Then An error message should be displayed "No matching records found"
@@ -21,3 +21,11 @@ Feature: Find Patient Record Functionality
       | patientID   |
       | invalidID   |
       | 99999       |
+
+    @regression
+  Scenario: Successfully find a patient record by name and match all details from jsondata file
+    When The User enters a valid patient name from jsondata file
+    Then The patient record for the name should be displayed
+    And Clicks on the patient record to view details
+    Then The patient record for the name should be displayed on the Patient Details page
+    And The patient details should match the details from jsondata file

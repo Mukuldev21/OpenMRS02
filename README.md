@@ -113,6 +113,11 @@ OpenMRS02/
 
 ---
 
+## Reports
+Check the sample generated test reports here: 
+<a href="reports/PassedReport.html" target="_blank">Passed</a> 
+<a href="reports/FailedReport.html" target="_blank">Failed</a>
+
 ## Authors
 
 - Mukul Dev Mahato
