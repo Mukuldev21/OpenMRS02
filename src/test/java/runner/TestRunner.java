@@ -8,8 +8,8 @@ import org.testng.annotations.DataProvider;
         features = {"src/test/java/features"},
         glue = {"steps", "hooks"},
         plugin = {"pretty", "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-        monochrome = true
-        //tags = "@regression"
+        monochrome = true,
+        tags = "@smoke1"
 )// Use 'and' to combine tags
 public class TestRunner extends AbstractTestNGCucumberTests {
 

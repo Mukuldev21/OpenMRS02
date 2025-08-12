@@ -29,6 +29,9 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//a[contains(@href,'coreapps.findPatient')]")
     public WebElement findPatientLink;
 
+    @FindBy(xpath = "//a[contains(@href,'registrationapp.registerPatient')]")
+    public WebElement registerPatientLink;
+
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -89,7 +92,12 @@ public class HomePage extends BasePage {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.logo a")));
     }
     public void clickFindPatientLink() {
+
         findPatientLink.click();
+    }
+
+    public void clickOnRegisterPatientLink() {
+        registerPatientLink.click();
     }
 
 

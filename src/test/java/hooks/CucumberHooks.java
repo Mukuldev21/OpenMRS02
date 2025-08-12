@@ -9,6 +9,7 @@ package hooks;
   import utils.*;
   import com.google.gson.JsonObject;
 
+  import java.io.IOException;
   import java.util.Map;
   import java.util.Properties;
   import java.util.concurrent.ConcurrentHashMap;
@@ -22,25 +23,45 @@ package hooks;
       public static Properties config;
       public static JsonObject loginDetails;
       public static JsonObject patientSearchDetails;
+      public static JsonObject registerPatientDetails;
 
       private static final ExtentReports extent = ExtentReportManager.getInstance();
       private static final Map<String, ExtentTest> featureTestMap = new ConcurrentHashMap<>();
       private static final ThreadLocal<ExtentTest> scenarioTest = new ThreadLocal<>();
 
+      @BeforeAll
+      public static void beforeAll() {
+          try {
+              // Load configuration and test data files
+              config = ConfigReader.loadProperties("src/test/resources/config/config.properties");
+              loginDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/loginDetails.json");
+              patientSearchDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/patientRecordForSearch.json");
+              registerPatientDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/registerPatientDetails.json");
+              // Initialize WebDriver once
+              driver.set(DriverManager.getDriver(config));
+              getDriver().manage().window().maximize();
+          } catch (IOException e) {
+              throw new RuntimeException(e);
+          }
+      }
+
       @Before
       public void setUp(Scenario scenario) {
 
           stepCounter.set(0);
-          try {
-              config = ConfigReader.loadProperties("src/test/resources/config/config.properties");
-              loginDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/loginDetails.json");
-              patientSearchDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/patientRecordForSearch.json");
+          // Update FamilyName with random digits before loading JSON
+          //LastNameUpdator.updateFamilyNameWithRandomDigits("src/test/resources/test_data/registerPatientDetails.json");
+         /* try {
+              //config = ConfigReader.loadProperties("src/test/resources/config/config.properties");
+              //loginDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/loginDetails.json");
+              //patientSearchDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/patientRecordForSearch.json");
+              //registerPatientDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/registerPatientDetails.json");
                 // Initialize WebDriver based on the configuration
               driver.set(DriverManager.getDriver(config));
           } catch (Exception e) {
               throw new RuntimeException("Failed to initialize WebDriver or load config", e);
-          }
-          getDriver().manage().window().maximize();
+          } */
+          //getDriver().manage().window().maximize();
 
           // Extract feature name from scenario
           String featureName = scenario.getUri().toString()
@@ -121,6 +142,7 @@ package hooks;
           scenarioTest.remove();
           stepCounter.remove();
       }
+
 
       public static WebDriver getDriver() {
           return driver.get();

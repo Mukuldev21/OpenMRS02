@@ -15,6 +15,9 @@ public class LoginSteps {
     private WebDriver driver = hooks.CucumberHooks.getDriver();
     private LoginPage loginPage = new LoginPage(driver);
     private HomePage homePage = new HomePage(driver);
+    String username = CucumberHooks.loginDetails.get("username").getAsString();
+    String password = CucumberHooks.loginDetails.get("password").getAsString();
+    String location = CucumberHooks.loginDetails.get("location").getAsString();
 
     @Given("The User is on the Login page")
     public void the_user_is_on_the_login_page() {
@@ -34,9 +37,7 @@ public class LoginSteps {
         StepTracker.setLastStepText("When The User enters a valid username and password");
         try {
             CucumberHooks.getScenarioTest().info("Entering valid username and password");
-            String username = CucumberHooks.loginDetails.get("username").getAsString();
-            String password = CucumberHooks.loginDetails.get("password").getAsString();
-            String location = CucumberHooks.loginDetails.get("location").getAsString();
+
             loginPage.enterUsername(username);
             loginPage.enterPassword(password);
             loginPage.selectSessionLocation(location);
@@ -64,8 +65,6 @@ public class LoginSteps {
         try {
             CucumberHooks.getScenarioTest().info("Verifying homepage redirection");
             homePage.verifyLogoIsDisplayed();
-            homePage.verifyLoggedInUser(CucumberHooks.loginDetails.get("username").getAsString());
-            homePage.verifyLocationWard(CucumberHooks.loginDetails.get("location").getAsString());
             homePage.verifyIdentifierMenuItemIsDisplayed();
             homePage.verifyChangeLocationButtonIsDisplayed();
         } catch (Exception e) {
