@@ -132,4 +132,15 @@ public class RegisterPatientSteps {
         }
     }
 
+    @And("The User should click on Register a Patient option in the menu")
+    public void theUserShouldClickOnRegisterAPatientOptionInTheMenu() {
+        StepTracker.setLastStepText("The User should click on Register a Patient option in the menu");
+        try {
+            CucumberHooks.getScenarioTest().info("Clicking on Register a Patient option in the menu");
+            homePage.clickOnRegisterPatientLink();
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
 }

@@ -12,26 +12,46 @@ public class HomePage extends BasePage {
     //Locators
 
     @FindBy(css = "div.logo a")
-    public WebElement openMRSLogo;
+    private WebElement openMRSLogo;
 
     @FindBy(xpath = "//h4[contains(text(),'Logged')]")
-    public WebElement loggedInUserText;
+    private WebElement loggedInUserText;
 
     @FindBy(css = "li.nav-item.identifier")
-    public WebElement identifierMenuItem;
+    private WebElement identifierMenuItem;
 
     @FindBy(css = "li.change-location")
-    public WebElement changeLocationButton;
+    private WebElement changeLocationButton;
 
     @FindBy(css = "li.nav-item.logout")
-    public WebElement logoutMenuItem;
+    private WebElement logoutMenuItem;
 
     @FindBy(xpath = "//a[contains(@href,'coreapps.findPatient')]")
-    public WebElement findPatientLink;
+    private WebElement findPatientLink;
 
     @FindBy(xpath = "//a[contains(@href,'registrationapp.registerPatient')]")
-    public WebElement registerPatientLink;
+    private WebElement registerPatientLink;
 
+    @FindBy(xpath = "//a[contains(@href,'coreapps.activeVisits')]")
+    private WebElement activeVisitsLink;
+
+    @FindBy(xpath = "//a[contains(@href,'referenceapplication.vitals')]")
+    private WebElement captureVitalsLink;
+
+    @FindBy(xpath = "//a[contains(@href,'appointmentscheduling')]")
+    private WebElement appointmentSchedulingLink;
+
+    @FindBy(xpath = "//a[contains(@href,'reportsapp')]")
+    private WebElement reportsLink;
+
+    @FindBy(xpath = "//a[contains(@href, 'datamanagement')]")
+    private WebElement dataManagementLink;
+
+    @FindBy(xpath = "//a[contains(@href, 'configureMetadata')]")
+    private WebElement configureMetadataLink;
+
+    @FindBy(xpath = "//a[contains(@href, 'systemadministration')]")
+    private WebElement systemAdministrationLink;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -99,6 +119,31 @@ public class HomePage extends BasePage {
     public void clickOnRegisterPatientLink() {
         registerPatientLink.click();
     }
+
+    public void clickOnActiveVisitsLink() {
+        activeVisitsLink.click();
+    }
+
+    public void clickOnCaptureVitalsLink() {
+        captureVitalsLink.click();
+    }
+
+    public void clickOnReportsLink() {
+        reportsLink.click();
+    }
+
+    public void clickOnDataManagementLink() {
+        dataManagementLink.click();
+    }
+    public void clickOnConfigureMetadataLink() {
+        configureMetadataLink.click();
+    }
+
+    public void clickOnSystemAdministrationLink() {
+        systemAdministrationLink.click();
+    }
+
+
 
 
 }

@@ -5,9 +5,9 @@ Feature: Register Patient Functionality
     When The User enters a valid username and password
     And The User clicks the login button
     Then The User should be redirected to the Homepage
-    And The User should click on "Register a Patient" option in the menu
+    And The User should click on Register a Patient option in the menu
 
-  @smoke1
+  @smoke @registerPatient @regression
   Scenario: Successfully register a new patient
     When The User enters a valid patient full name
     And The User selects gender
