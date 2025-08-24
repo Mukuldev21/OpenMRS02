@@ -12,10 +12,10 @@ public class PatientRecordPage extends BasePage {
 
 
     @FindBy(id = "patient-search")
-    public WebElement patientSearchInput;
+    private WebElement patientSearchInput;
 
     @FindBy(xpath = "//h2[contains(text(),'Find Patient ')]")
-    public WebElement findPatientHeader;
+    private WebElement findPatientHeader;
 
 
     public PatientRecordPage(WebDriver driver) {

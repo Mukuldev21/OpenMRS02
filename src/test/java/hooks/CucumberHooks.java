@@ -24,6 +24,7 @@ package hooks;
       public static JsonObject loginDetails;
       public static JsonObject patientSearchDetails;
       public static JsonObject registerPatientDetails;
+      public static JsonObject patientCaptureVitals;
 
       private static final ExtentReports extent = ExtentReportManager.getInstance();
       private static final Map<String, ExtentTest> featureTestMap = new ConcurrentHashMap<>();
@@ -37,10 +38,8 @@ package hooks;
               loginDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/loginDetails.json");
               patientSearchDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/patientRecordForSearch.json");
               registerPatientDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/registerPatientDetails.json");
-              // Initialize WebDriver once
-              driver.set(DriverManager.getDriver(config));
-              getDriver().manage().window().maximize();
-          } catch (IOException e) {
+              patientCaptureVitals = ConfigReader.loadJsonConfig("src/test/resources/test_data/patientCaptureVitals.json");
+          } catch (Exception e) {
               throw new RuntimeException(e);
           }
       }
@@ -49,20 +48,14 @@ package hooks;
       public void setUp(Scenario scenario) {
 
           stepCounter.set(0);
-          // Update FamilyName with random digits before loading JSON
-          //LastNameUpdator.updateFamilyNameWithRandomDigits("src/test/resources/test_data/registerPatientDetails.json");
-         /* try {
-              //config = ConfigReader.loadProperties("src/test/resources/config/config.properties");
-              //loginDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/loginDetails.json");
-              //patientSearchDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/patientRecordForSearch.json");
-              //registerPatientDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/registerPatientDetails.json");
-                // Initialize WebDriver based on the configuration
+
+         try {
+
               driver.set(DriverManager.getDriver(config));
+              getDriver().manage().window().maximize();
           } catch (Exception e) {
               throw new RuntimeException("Failed to initialize WebDriver or load config", e);
-          } */
-          //getDriver().manage().window().maximize();
-
+          }
           // Extract feature name from scenario
           String featureName = scenario.getUri().toString()
                   .substring(scenario.getUri().toString().lastIndexOf('/') + 1)
