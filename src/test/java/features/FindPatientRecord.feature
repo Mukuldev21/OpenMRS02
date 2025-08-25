@@ -25,7 +25,24 @@ Feature: Find Patient Record Functionality
     @regression @findPatientRecord
   Scenario: Successfully find a patient record by name and match all details from jsondata file
     When The User enters a valid patient name from jsondata file
-    Then The patient record for the name should be displayed
+    Then The patient record for patient ID should be displayed
     And Clicks on the patient record to view details
     Then The patient record for the name should be displayed on the Patient Details page
     And The patient details should match the details from jsondata file
+
+  @startVisit
+  Scenario: Start visit for the patient from record found by ID and admit to inpatient
+    When The User enters a valid patient ID from jsondata file
+    Then The patient record for the name should be displayed
+    And Clicks on the patient record to view details
+    Then The patient record for the name should be displayed on the Patient Details page
+    When The User clicks on Start Visit button
+    And The User clicks on the Confirm Start Visit button
+    Then The visit should be started successfully
+    And The user clicks on the admit to inpatient button
+    And The User selects a location from the dropdown
+    And The User clicks on the Save button to admit the patient
+    Then The patient should be admitted successfully
+    And The user clicks on End Visit button
+    And The User clicks on the Yes button to End Visit
+    Then The visit should be ended successfully

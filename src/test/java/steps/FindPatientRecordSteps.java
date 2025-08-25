@@ -17,6 +17,15 @@ public class FindPatientRecordSteps {
     private LoginPage loginPage = new LoginPage(driver);
     private HomePage homePage = new HomePage(driver);
     private PatientRecordPage patientRecordPage = new PatientRecordPage(driver);
+    private String patientId = CucumberHooks.patientSearchDetails.get("patient-id").getAsString();
+    private String patientName = CucumberHooks.patientSearchDetails.get("patient-name").getAsString();
+    private String weight = CucumberHooks.patientSearchDetails.get("weight").getAsString();
+    private String height = CucumberHooks.patientSearchDetails.get("height").getAsString();
+    private String temperature = CucumberHooks.patientSearchDetails.get("temperature").getAsString();
+    private String systolicBloodPressure = CucumberHooks.patientSearchDetails.get("systolic-blood-pressure").getAsString();
+    private String diastolicBloodPressure = CucumberHooks.patientSearchDetails.get("diastolic-blood-pressure").getAsString();
+    private String conditions = CucumberHooks.patientSearchDetails.get("conditions").getAsString();
+    private String location = CucumberHooks.patientSearchDetails.get("location").getAsString();
 
     @When("The User enters a valid patient ID from jsondata file")
     public void the_user_enters_a_valid_patient_id_from_jsondata_file() {
@@ -95,7 +104,7 @@ public class FindPatientRecordSteps {
             StepErrorTracker.setLastError(e.getMessage());
             throw e;
         }
-        
+
     }
 
     @Then("The patient record for the name should be displayed")
@@ -109,7 +118,7 @@ public class FindPatientRecordSteps {
             StepErrorTracker.setLastError(e.getMessage());
             throw e;
         }
-        
+
     }
 
     @And("Clicks on the patient record to view details")
@@ -124,7 +133,7 @@ public class FindPatientRecordSteps {
             StepErrorTracker.setLastError(e.getMessage());
             throw e;
         }
-        
+
     }
 
     @Then("The patient record for the name should be displayed on the Patient Details page")
@@ -139,23 +148,150 @@ public class FindPatientRecordSteps {
             StepErrorTracker.setLastError(e.getMessage());
             throw e;
         }
-        
+
     }
 
     @And("The patient details should match the details from jsondata file")
     public void thePatientDetailsShouldMatchTheDetailsFromJsondataFile() {
         StepTracker.setLastStepText("The patient details should match the details from jsondata file");
-        String patientId = CucumberHooks.patientSearchDetails.get("patient-id").getAsString();
-        String weight = CucumberHooks.patientSearchDetails.get("weight").getAsString();
-        String height = CucumberHooks.patientSearchDetails.get("height").getAsString();
-        String temperature = CucumberHooks.patientSearchDetails.get("temperature").getAsString();
-        String systolicBloodPressure = CucumberHooks.patientSearchDetails.get("systolic-blood-pressure").getAsString();
-        String diastolicBloodPressure = CucumberHooks.patientSearchDetails.get("diastolic-blood-pressure").getAsString();
-        String conditions = CucumberHooks.patientSearchDetails.get("conditions").getAsString();
+
 
         try {
             CucumberHooks.getScenarioTest().info("Verifying patient details for ID: " + patientId);
             patientRecordPage.verifyDetailsOnPatientRecordPage(patientId, weight, height, temperature, systolicBloodPressure, diastolicBloodPressure, conditions);
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
+
+    @When("The User clicks on Start Visit button")
+    public void theUserClicksOnStartVisitButton() {
+
+        StepTracker.setLastStepText("The User clicks on Start Visit button");
+        try {
+            CucumberHooks.getScenarioTest().info("Clicking on Start Visit button");
+            patientRecordPage.clickOnStartVisit();
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
+
+
+    @Then("The User clicks on the Confirm Start Visit button")
+    public void theUserClicksOnTheConfirmStartVisitButton() {
+        StepTracker.setLastStepText("The User clicks on the Confirm Start Visit button");
+        try {
+            CucumberHooks.getScenarioTest().info("Verifying Confirm Start Visit popup is displayed");
+            patientRecordPage.verifyStartAVisitMenu();
+            CucumberHooks.getScenarioTest().info("Verifying Start A Visit message is displayed");
+            patientRecordPage.verifyStartAVisitMessage(patientName);
+            CucumberHooks.getScenarioTest().info("Clicking on Confirm Start Visit button");
+            patientRecordPage.clickOnConfirmButton();
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+
+    }
+
+    @Then("The visit should be started successfully")
+    public void theVisitShouldBeStartedSuccessfully() {
+        StepTracker.setLastStepText("The visit should be started successfully");
+        try {
+            CucumberHooks.getScenarioTest().info("Verifying visit is started successfully for patient ID: " + patientId);
+            patientRecordPage.verifyVisitStarted(patientId);
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+
+    }
+
+    @And("The user clicks on the admit to inpatient button")
+    public void theUserClicksOnTheAdmitToInpatientButton() {
+        StepTracker.setLastStepText("The user clicks on the admit to inpatient button");
+        try {
+            CucumberHooks.getScenarioTest().info("Clicking on Admit to Inpatient button");
+            patientRecordPage.clickOnAdmitToInpatientWard();
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
+
+
+    @And("The User selects a location from the dropdown")
+    public void theUserSelectsALocationFromTheDropdown() {
+        StepTracker.setLastStepText("The User selects a location from the dropdown");
+        try {
+            CucumberHooks.getScenarioTest().info("Selecting location: " + location);
+            patientRecordPage.selectLocationWard(location);
+         } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
+
+
+    @And("The User clicks on the Save button to admit the patient")
+    public void theUserClicksOnTheSaveButtonToAdmitThePatient() {
+        StepTracker.setLastStepText("The User clicks on the Save button to admit the patient");
+        try {
+            CucumberHooks.getScenarioTest().info("Clicking on Save button to admit the patient");
+            patientRecordPage.clickOnSaveButtonToAdmitPatient();
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Then("The patient should be admitted successfully")
+    public void thePatientShouldBeAdmittedSuccessfully() {
+        StepTracker.setLastStepText("The patient should be admitted successfully");
+        try {
+            CucumberHooks.getScenarioTest().info("Verifying patient with patientID: " +patientId + " is admitted successfully to: " + location);
+            patientRecordPage.verifyPatientAdmitted(patientId);
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
+
+    @And("The user clicks on End Visit button")
+    public void theUserClicksOnEndVisitButton() {
+
+        StepTracker.setLastStepText("The user clicks on End Visit button");
+        try {
+            CucumberHooks.getScenarioTest().info("Clicking on End Visit button");
+            patientRecordPage.clickOnEndVisit();
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
+
+    @And("The User clicks on the Yes button to End Visit")
+    public void theUserClicksOnTheYesButtonToEndVisit() {
+        StepTracker.setLastStepText("The User clicks on the Yes button to End Visit");
+        try {
+            CucumberHooks.getScenarioTest().info("Verifying End Visit confirmation popup is displayed");
+            patientRecordPage.verifyEndVisitMenu();
+            CucumberHooks.getScenarioTest().info("Clicking on Yes button to End Visit");
+            patientRecordPage.clickOnYesButtonToEndVisit();
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Then("The visit should be ended successfully")
+    public void theVisitShouldBeEndedSuccessfully() {
+        StepTracker.setLastStepText("The visit should be ended successfully");
+        try {
+            CucumberHooks.getScenarioTest().info("Verifying visit is ended successfully for patient ID: " + patientId);
+            patientRecordPage.verifyVisitEnded(patientId);
         } catch (Exception e) {
             StepErrorTracker.setLastError(e.getMessage());
             throw e;

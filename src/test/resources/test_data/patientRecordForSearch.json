@@ -1,11 +1,11 @@
 {
-  "patient-id": "100HXG",
+  "patient-id": "100HTR",
   "patient-name": "Gautam Kumar Chaudhary",
   "weight": "88",
   "height": "130",
   "temperature": "38",
   "systolic-blood-pressure": "154",
   "diastolic-blood-pressure" : "90",
-  "conditions": "Diabetes mellitus, type 2"
-
+  "conditions": "Diabetes mellitus, type 2",
+  "location": "Isolation Ward"
 }
