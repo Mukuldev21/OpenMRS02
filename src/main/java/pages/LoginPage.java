@@ -89,6 +89,40 @@ public class LoginPage extends BasePage {
         System.out.println("Session location error message is displayed: " + actualMessage);
     }
 
+    public void verifySelectedLocationIsDisplayed(String location) {
+        WebElement selectedLocationElement = wait.until(
+                ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'"+ location +"')]"))
+        );
+
+        String actualLocation = selectedLocationElement.getText().trim();
+        Assert.assertEquals(actualLocation, location, "Selected location does not match.");
+        System.out.println("Selected location is displayed correctly: " + actualLocation);
+    }
+
+    public void clickHelpLink(){
+        WebElement helpLink = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@id='cantLogin']")));
+        helpLink.click();
+    }
+
+    public void verifyHelpLinkMessageIsDisplayed(){
+        WebElement helpMessageElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("p.dialog-instructions")));
+        String actualMessage = helpMessageElement.getText().trim();
+        Assert.assertTrue(helpMessageElement.isDisplayed(), "Please contact your System Administrator.");
+        System.out.println("Help message is displayed: " + actualMessage);
+    }
+
+    public void clickHelpLinkOkayButton(){
+        WebElement okayButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[text()='Okay']")));
+        if(!okayButton.isDisplayed()){
+            throw new AssertionError("Okay button not displayed.");
+        }
+        okayButton.click();
+
+    }
+
+
+
+
 
 
 }

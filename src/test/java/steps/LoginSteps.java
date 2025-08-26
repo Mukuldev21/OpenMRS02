@@ -1,6 +1,7 @@
 package steps;
 
 import hooks.CucumberHooks;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -149,4 +150,109 @@ public class LoginSteps {
     }
 
 
+    @When("The User enters username and password")
+    public void theUserEntersUsernameAndPassword() {
+        StepTracker.setLastStepText("When The User enters username and password");
+        try {
+            CucumberHooks.getScenarioTest().info("Entering username and password");
+            loginPage.enterUsername(username);
+            loginPage.enterPassword(password);
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+
+    }
+
+
+    @And("The User selects a {string} for the session")
+    public void theUserSelectsAForTheSession(String location) {
+        StepTracker.setLastStepText("And The User selects a \"" + location + "\" for the session");
+        try {
+            CucumberHooks.getScenarioTest().info("Selecting session location: " + location);
+            loginPage.selectSessionLocation(location);
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
+
+    @And("The User verifies the selected location is displayed on the login page")
+    public void theUserVerifiesTheSelectedLocationIsDisplayedOnTheLoginPage() {
+        StepTracker.setLastStepText("And The User verifies the selected location is displayed on the login page");
+        try {
+            CucumberHooks.getScenarioTest().info("Verifying selected location is displayed on login page");
+            loginPage.verifySelectedLocationIsDisplayed(location);
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
+
+    @And("The User verifies the selected {string} is displayed on the login page")
+    public void theUserVerifiesTheSelectedIsDisplayedOnTheLoginPage(String location) {
+        StepTracker.setLastStepText("And The User verifies the selected \"" + location + "\" is displayed on the login page");
+        try {
+            CucumberHooks.getScenarioTest().info("Verifying selected location is displayed on login page");
+            loginPage.verifySelectedLocationIsDisplayed(location);
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
+
+    @When("The User clicks on the {string} link")
+    public void theUserClicksOnTheLink(String arg0) {
+
+        StepTracker.setLastStepText("When The User clicks on the \"" + arg0 + "\" link");
+        try {
+            CucumberHooks.getScenarioTest().info("Clicking on the \"" + arg0 + "\" link");
+            loginPage.clickHelpLink();
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Then("the {string} pop up message should appear")
+    public void thePopUpMessageShouldAppear(String arg0) {
+        StepTracker.setLastStepText("Then the \"" + arg0 + "\" pop up message should appear");
+        try {
+            CucumberHooks.getScenarioTest().info("Verifying the \"" + arg0 + "\" pop up message appears");
+            loginPage.verifyHelpLinkMessageIsDisplayed();
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
+
+    @When("The User clicks on the Okay button of the {string} pop up")
+    public void theUserClicksOnTheOkayButtonOfThePopUp(String arg0) {
+        StepTracker.setLastStepText("When The User clicks on the Okay button of the \"" + arg0 + "\" pop up");
+        try {
+            CucumberHooks.getScenarioTest().info("Clicking on the Okay button of the \"" + arg0 + "\" pop up");
+            loginPage.clickHelpLinkOkayButton();
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Then("the {string} pop up message should close")
+    public void thePopUpMessageShouldClose(String arg0) {
+        StepTracker.setLastStepText("Then the \"" + arg0 + "\" pop up message should close");
+        try {
+            CucumberHooks.getScenarioTest().info("Verifying the \"" + arg0 + "\" pop up message closes");
+            // Assuming the clickHelpLinkOkayButton method already verifies the pop-up is closed.
+            loginPage.verifyLoginPageIsDisplayed();
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Given("The User is on the Login page using {string}")
+    public void theUserIsOnTheLoginPageUsing(String arg0) {
+
+    }
 }
