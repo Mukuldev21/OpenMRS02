@@ -25,6 +25,7 @@ package hooks;
       public static JsonObject patientSearchDetails;
       public static JsonObject registerPatientDetails;
       public static JsonObject patientCaptureVitals;
+      public static JsonObject activeVisitDetails;
 
       private static final ExtentReports extent = ExtentReportManager.getInstance();
       private static final Map<String, ExtentTest> featureTestMap = new ConcurrentHashMap<>();
@@ -39,6 +40,8 @@ package hooks;
               patientSearchDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/patientRecordForSearch.json");
               registerPatientDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/registerPatientDetails.json");
               patientCaptureVitals = ConfigReader.loadJsonConfig("src/test/resources/test_data/patientCaptureVitals.json");
+              activeVisitDetails = ConfigReader.loadJsonConfig("src/test/resources/test_data/activeVisitDetails.json");
+
           } catch (Exception e) {
               throw new RuntimeException(e);
           }

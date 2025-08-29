@@ -39,10 +39,21 @@ public class CaptureVitalsPage extends BasePage {
 
     }
     public void verifyPatientRecordDisplayed(String patientId) {
-        WebElement patientRecord = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(), '" + patientId + "')]")));
+        WebElement patientRecord = wait.until(ExpectedConditions
+                .presenceOfElementLocated(By.xpath("//td[contains(text(), '" + patientId + "')]")));
         if (!patientRecord.isDisplayed()) {
             throw new AssertionError("Patient record for " + patientId + " is not displayed.");
         }
+    }
+
+    public void verifyErrorMessageOnCaptureVitals(){
+
+        WebElement errorMessage = wait.until(ExpectedConditions
+                .presenceOfElementLocated(By.xpath("//td[contains(text(), 'No matching records found')]")));
+        if (!errorMessage.isDisplayed()) {
+            throw new AssertionError("Error message is not displayed for invalid patient ID.");
+        }
+
     }
 
 

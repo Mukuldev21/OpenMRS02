@@ -52,4 +52,29 @@ public class CaptureVitalsSteps {
             throw e;
         }
     }
+
+    @When("The User enters an invalid patient ID {string} in the Capture Vitals page")
+    public void theUserEntersAnInvalidPatientIDInTheCaptureVitalsPage(String arg0) {
+        StepTracker.setLastStepText("The User enters an invalid patient ID in the Capture Vitals page");
+        try {
+            CucumberHooks.getScenarioTest().info("Entering invalid patient ID: " + arg0);
+            captureVitalsPage.enterPatientId(arg0);
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+
+    }
+
+    @Then("An error message should be displayed {string} in the Capture Vitals page")
+    public void anErrorMessageShouldBeDisplayedInTheCaptureVitalsPage(String arg0) {
+        StepTracker.setLastStepText("An error message should be displayed in the Capture Vitals page");
+        try {
+            CucumberHooks.getScenarioTest().info("Verifying error message: " + arg0);
+            captureVitalsPage.verifyErrorMessageOnCaptureVitals();
+        } catch (Exception e) {
+            StepErrorTracker.setLastError(e.getMessage());
+            throw e;
+        }
+    }
 }
